@@ -46,7 +46,7 @@ public class ControllerMain {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 try {
-                    controllerProduct = new ControllerProduct(new ViewProduct(viewMain, true), new Product(), ViewProductMode.NEW);
+                    controllerProduct = new ControllerProduct(new ViewProduct(viewMain, true), ViewProductMode.NEW);
                 } catch (Exception ex) {
                     Logger.getLogger(ControllerMain.class.getName()).log(Level.SEVERE, null, ex);
                 }

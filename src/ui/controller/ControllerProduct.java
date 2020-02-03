@@ -26,11 +26,9 @@ import ui.view.ViewProductMode;
 public class ControllerProduct {
 
     private final ViewProduct viewProduct;
-    private Product product;
 
-    public ControllerProduct(ViewProduct viewProduct, Product product, ViewProductMode viewProductMode) throws Exception {
+    public ControllerProduct(ViewProduct viewProduct, ViewProductMode viewProductMode) throws Exception {
         this.viewProduct = viewProduct;
-        this.product = product;
 
         init(viewProductMode);
 
@@ -95,14 +93,14 @@ public class ControllerProduct {
         });
     }
 
-    private void setMode(ViewProductMode viewProductMode) {
+    private void setMode(ViewProductMode viewProductMode) throws IOException {
         switch (viewProductMode) {
             case NEW:
                 viewProduct.getjButtonDelete().setVisible(false);
                 viewProduct.getjButtonUpdate().setVisible(false);
                 viewProduct.getjButtonEnableChanges().setVisible(false);
                 viewProduct.getjButtonSave().setVisible(true);
-                viewProduct.getjTextFieldId().setEditable(true);
+                viewProduct.getjTextFieldId().setEditable(false);
                 viewProduct.getjTextFieldName().setEditable(true);
                 viewProduct.getjTextFieldPrice().setEditable(true);
                 viewProduct.getjComboBoxManufacturer().setEnabled(true);
@@ -111,6 +109,7 @@ public class ControllerProduct {
                 viewProduct.getjButtonDelete().setVisible(false);
                 viewProduct.getjButtonUpdate().setVisible(false);
                 viewProduct.getjButtonSave().setVisible(false);
+                viewProduct.getjButtonSelect().setEnabled(false);
                 viewProduct.getjButtonEnableChanges().setVisible(true);
                 viewProduct.getjTextFieldId().setEditable(false);
                 viewProduct.getjTextFieldName().setEditable(false);
@@ -123,6 +122,7 @@ public class ControllerProduct {
                 viewProduct.getjButtonUpdate().setVisible(true);
                 viewProduct.getjButtonEnableChanges().setVisible(false);
                 viewProduct.getjButtonSave().setVisible(false);
+                viewProduct.getjButtonSelect().setEnabled(true);
                 viewProduct.getjTextFieldId().setEditable(false);
                 viewProduct.getjTextFieldName().setEditable(true);
                 viewProduct.getjTextFieldPrice().setEditable(true);
@@ -136,16 +136,16 @@ public class ControllerProduct {
         viewProduct.getjComboBoxManufacturer().setModel(new DefaultComboBoxModel(manufacturers.toArray()));
     }
 
-    private void fillProduct() {
+    private void fillProduct() throws IOException {
+        Product product = (Product) Controller.getInstance().getMap().get("current.product");
         viewProduct.getjTextFieldId().setText(product.getId().toString());
         viewProduct.getjTextFieldName().setText(product.getName());
         viewProduct.getjTextFieldPrice().setText(product.getPrice().toString());
         viewProduct.getjComboBoxManufacturer().setSelectedItem(product.getManufacturer());
     }
 
-    private void save() throws IOException {
-        product = new Product();
-        product.setId(Long.parseLong(viewProduct.getjTextFieldId().getText()));
+    private void save() throws Exception {
+        Product product = new Product();
         product.setName(viewProduct.getjTextFieldName().getText());
         product.setPrice(new BigDecimal(viewProduct.getjTextFieldPrice().getText()));
         product.setManufacturer((Manufacturer) viewProduct.getjComboBoxManufacturer().getSelectedItem());
