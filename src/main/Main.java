@@ -5,7 +5,6 @@
  */
 package main;
 
-import domain.User;
 import ui.controller.ControllerLogin;
 import ui.view.ViewLogin;
 
@@ -16,8 +15,9 @@ import ui.view.ViewLogin;
 public class Main {
 
     public static void main(String[] args) {
-        ControllerLogin controllerLogin = new ControllerLogin(new ViewLogin(), new User());
+        ControllerLogin controllerLogin = new ControllerLogin(new ViewLogin());
         controllerLogin.open();
     }
 
+    // Zasto moram da inicijalizujem objekat kad ga saljem kroz mrezu ako je atribut klase, new User();
 }

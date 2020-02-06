@@ -25,12 +25,10 @@ import ui.view.ViewLogin;
 public class ControllerLogin {
 
     private final ViewLogin viewLogin;
-    private final User user;
     private final ThreadLogin threadLogin;
 
-    public ControllerLogin(ViewLogin viewLogin, User user) {
+    public ControllerLogin(ViewLogin viewLogin) {
         this.viewLogin = viewLogin;
-        this.user = user;
         threadLogin = new ThreadLogin(viewLogin);
 
         init();
@@ -97,6 +95,7 @@ public class ControllerLogin {
     }
 
     private void login() {
+        User user = new User();
         user.setUsername(viewLogin.getjTextFieldUsername().getText());
         user.setPassword(String.valueOf(viewLogin.getjPasswordFieldPassword().getPassword()));
         try {
@@ -105,6 +104,7 @@ public class ControllerLogin {
             close();
             new ControllerMain(Controller.getInstance().getViewMain()).open();
         } catch (Exception ex) {
+            ex.printStackTrace();
             viewLogin.getjLabelError().setText(ex.getMessage());
             viewLogin.getjTextFieldUsername().setBorder(BorderFactory.createLineBorder(Color.RED, 1));
             viewLogin.getjPasswordFieldPassword().setBorder(BorderFactory.createLineBorder(Color.RED, 1));
