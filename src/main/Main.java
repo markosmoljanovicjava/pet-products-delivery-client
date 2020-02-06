@@ -19,5 +19,6 @@ public class Main {
         controllerLogin.open();
     }
 
-    // Zasto moram da inicijalizujem objekat kad ga saljem kroz mrezu ako je atribut klase, new User();
+    // Zasto moram da inicijalizujem objekat kad ga saljem kroz mrezu ako je atribut klase,
+    //new User(), nije moglo da User user bude final u ViewLogin
 }
