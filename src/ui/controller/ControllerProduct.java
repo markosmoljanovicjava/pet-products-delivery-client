@@ -127,6 +127,7 @@ public class ControllerProduct {
                 viewProduct.getjTextFieldName().setEditable(true);
                 viewProduct.getjTextFieldPrice().setEditable(true);
                 viewProduct.getjComboBoxManufacturer().setEnabled(true);
+                fillProduct();
                 break;
         }
     }
