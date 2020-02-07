@@ -132,7 +132,7 @@ public class ControllerProduct {
     }
 
     private void fillManufacturers() throws Exception {
-        List<Manufacturer> manufacturers = Controller.getInstance().getManufacturers();
+        List<Manufacturer> manufacturers = Controller.getInstance().getAllManufacturers();
         viewProduct.getjComboBoxManufacturer().setModel(new DefaultComboBoxModel(manufacturers.toArray()));
     }
 

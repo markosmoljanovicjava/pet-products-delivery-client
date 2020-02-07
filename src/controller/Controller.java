@@ -49,11 +49,8 @@ public class Controller {
         return instance;
     }
 
-    public void login(User user) throws IOException, ClassNotFoundException, Exception {
-        RequestObject requestObject = new RequestObject();
-        requestObject.setOperation(Operation.LOGIN);
-        requestObject.setData(user);
-
+    public void login(User user) throws Exception {
+        RequestObject requestObject = new RequestObject(Operation.LOGIN, user);
         objectOutputStream.writeObject(requestObject);
         objectOutputStream.flush();
 
@@ -70,14 +67,27 @@ public class Controller {
     public Product saveProduct(Product product) throws Exception {
         RequestObject requestObject = new RequestObject(Operation.SAVE_PRODUCT, product);
         objectOutputStream.writeObject(requestObject);
-        ResponseObject response = (ResponseObject) objectInputStream.readObject();
-        if (response.getStatus().equals(ResponseStatus.SUCCESS)) {
+        objectOutputStream.flush();
 
-            Product product1 = (Product) response.getData();
+        ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
+        if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
+            Product product1 = (Product) responseObject.getData();
             this.map.put("current.product", product1);
             return product1;
         }
-        throw new Exception(response.getErrorMessage());
+        throw new Exception(responseObject.getErrorMessage());
+    }
+
+    public List<Manufacturer> getAllManufacturers() throws Exception {
+        RequestObject requestObject = new RequestObject(Operation.GET_ALL_MANUFACTURERS);
+        objectOutputStream.writeObject(requestObject);
+        objectOutputStream.flush();
+
+        ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
+        if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
+            return (List<Manufacturer>) responseObject.getData();
+        }
+        throw new Exception(responseObject.getErrorMessage());
     }
 
     public Map<String, Object> getMap() {
@@ -91,11 +101,4 @@ public class Controller {
         return viewMain;
     }
 
-    public List<Manufacturer> getManufacturers() {
-        List<Manufacturer> list = new ArrayList();
-        list.add(new Manufacturer(1L, "Manufacturer-1", "Adress-1", "111-111-111"));
-        list.add(new Manufacturer(2L, "Manufacturer-2", "Adress-2", "222-222-222"));
-        list.add(new Manufacturer(3L, "Manufacturer-3", "Adress-3", "333-333-333"));
-        return list;
-    }
 }
