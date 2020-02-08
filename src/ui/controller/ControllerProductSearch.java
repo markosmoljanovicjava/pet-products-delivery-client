@@ -9,11 +9,13 @@ import controller.Controller;
 import domain.Product;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 import ui.view.ProductsTableModel;
 import ui.view.ViewProduct;
 import ui.view.ViewProductMode;
 import ui.view.ViewProductSearch;
+import util.Keys;
 
 /**
  *
@@ -25,14 +27,12 @@ public class ControllerProductSearch {
     private final List<Product> products;
     private ControllerProduct controllerProduct;
 
-    public ControllerProductSearch(ViewProductSearch viewProductSearch) {
+    public ControllerProductSearch(ViewProductSearch viewProductSearch) throws Exception {
         this.viewProductSearch = viewProductSearch;
-//        products = Controller.getInstance().getProducts();
-//
-        products = null;
-//
+        products = Controller.getInstance().getAllProducts();
 
         init();
+
         setListeners();
     }
 
@@ -44,10 +44,11 @@ public class ControllerProductSearch {
         viewProductSearch.dispose();
     }
 
-    private void init() {
+    private void init() throws IOException {
         viewProductSearch.setLocationRelativeTo(null);
         viewProductSearch.setTitle("Search products");
         viewProductSearch.getjTableProducts().setModel(new ProductsTableModel(products));
+        Controller.getInstance().getMap().put(Keys.PRODUCTS_TABLE_MODEL, viewProductSearch.getjTableProducts().getModel());
     }
 
     private void setListeners() {
@@ -65,7 +66,13 @@ public class ControllerProductSearch {
                     Long id = (Long) viewProductSearch.getjTableProducts().getValueAt(i, 0);
                     for (Product product : products) {
                         if (product.getId().equals(id)) {
-//                            controllerProduct = new ControllerProduct(new ViewProduct(Controller.getInstance().getViewMain(), true), product, ViewProductMode.VIEW);
+                            try {
+                                Controller.getInstance().getMap().put(Keys.PRODUCT, product);
+                                controllerProduct = new ControllerProduct(
+                                        new ViewProduct(Controller.getInstance().getViewMain(), true), ViewProductMode.VIEW);
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
                             controllerProduct.open();
                         }
                     }
@@ -75,8 +82,6 @@ public class ControllerProductSearch {
         viewProductSearch.getjButtonRefreashTable().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                ProductsTableModel tableModel = (ProductsTableModel) viewProductSearch.getjTableProducts().getModel();
-                tableModel.refreash();
             }
         });
     }

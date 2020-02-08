@@ -16,8 +16,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import ui.view.ProductsTableModel;
 import ui.view.ViewProduct;
 import ui.view.ViewProductMode;
+import util.Keys;
 
 /**
  *
@@ -83,8 +85,9 @@ public class ControllerProduct {
         viewProduct.getjButtonUpdate().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                update();
                 try {
+                    update();
+                    fillTable();
                     init(ViewProductMode.VIEW);
                 } catch (Exception ex) {
                     Logger.getLogger(ControllerProduct.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +96,7 @@ public class ControllerProduct {
         });
     }
 
-    private void setMode(ViewProductMode viewProductMode) throws IOException {
+    private void setMode(ViewProductMode viewProductMode) throws Exception {
         switch (viewProductMode) {
             case NEW:
                 viewProduct.getjButtonDelete().setVisible(false);
@@ -138,7 +141,7 @@ public class ControllerProduct {
     }
 
     private void fillProduct() throws IOException {
-        Product product = (Product) Controller.getInstance().getMap().get("current.product");
+        Product product = (Product) Controller.getInstance().getMap().get(Keys.PRODUCT);
         viewProduct.getjTextFieldId().setText(product.getId().toString());
         viewProduct.getjTextFieldName().setText(product.getName());
         viewProduct.getjTextFieldPrice().setText(product.getPrice().toString());
@@ -153,12 +156,18 @@ public class ControllerProduct {
         Controller.getInstance().saveProduct(product);
     }
 
-    private void update() {
-//        product = new Product();
-//        product.setId(Long.parseLong(viewProduct.getjTextFieldId().getText()));
-//        product.setName(viewProduct.getjTextFieldName().getText());
-//        product.setPrice(new BigDecimal(viewProduct.getjTextFieldPrice().getText()));
-//        product.setManufacturer((Manufacturer) viewProduct.getjComboBoxManufacturer().getSelectedItem());
-//        Controller.getInstance().updateProduct(product);
+    private void update() throws Exception {
+        Product product = new Product();
+        product.setId(Long.parseLong(viewProduct.getjTextFieldId().getText()));
+        product.setName(viewProduct.getjTextFieldName().getText());
+        product.setPrice(new BigDecimal(viewProduct.getjTextFieldPrice().getText()));
+        product.setManufacturer((Manufacturer) viewProduct.getjComboBoxManufacturer().getSelectedItem());
+        Controller.getInstance().updateProduct(product);
+    }
+
+    private void fillTable() throws Exception {
+        ProductsTableModel ptb = (ProductsTableModel) Controller.getInstance().getMap().get(Keys.PRODUCTS_TABLE_MODEL);
+        ptb.setProducts(Controller.getInstance().getAllProducts());
+        ptb.refreash();
     }
 }

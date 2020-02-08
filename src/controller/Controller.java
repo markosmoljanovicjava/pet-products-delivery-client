@@ -12,13 +12,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import transfer.RequestObject;
 import transfer.ResponseObject;
 import ui.view.ViewMain;
+import util.Keys;
 import util.Operation;
 import util.ResponseStatus;
 
@@ -29,7 +29,7 @@ import util.ResponseStatus;
 public class Controller {
 
     private static Controller instance;
-    private final Map<String, Object> map;
+    private final Map<Integer, Object> map;
     private final Socket socket;
     private final ObjectOutputStream objectOutputStream;
     private final ObjectInputStream objectInputStream;
@@ -49,6 +49,17 @@ public class Controller {
         return instance;
     }
 
+    public Map<Integer, Object> getMap() {
+        return map;
+    }
+
+    public ViewMain getViewMain() {
+        if (viewMain == null) {
+            viewMain = new ViewMain();
+        }
+        return viewMain;
+    }
+
     public void login(User user) throws Exception {
         RequestObject requestObject = new RequestObject(Operation.LOGIN, user);
         objectOutputStream.writeObject(requestObject);
@@ -58,7 +69,7 @@ public class Controller {
 
         ResponseStatus status = responseObject.getStatus();
         if (status == ResponseStatus.SUCCESS) {
-            map.put("user", responseObject.getData());
+            map.put(Keys.USER, responseObject.getData());
         } else {
             throw new Exception(responseObject.getErrorMessage());
         }
@@ -72,7 +83,7 @@ public class Controller {
         ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
         if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
             Product product1 = (Product) responseObject.getData();
-            this.map.put("current.product", product1);
+            this.map.put(Keys.PRODUCT, product1);
             return product1;
         }
         throw new Exception(responseObject.getErrorMessage());
@@ -90,15 +101,30 @@ public class Controller {
         throw new Exception(responseObject.getErrorMessage());
     }
 
-    public Map<String, Object> getMap() {
-        return map;
+    public Product updateProduct(Product product) throws Exception {
+        RequestObject requestObject = new RequestObject(Operation.UPDATE_PRODUCT, product);
+        objectOutputStream.writeObject(requestObject);
+        objectOutputStream.flush();
+
+        ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
+        if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
+            Product product1 = (Product) responseObject.getData();
+            this.map.put(Keys.PRODUCT, product1);
+            return product1;
+        }
+        throw new Exception(responseObject.getErrorMessage());
     }
 
-    public ViewMain getViewMain() {
-        if (viewMain == null) {
-            viewMain = new ViewMain();
+    public List<Product> getAllProducts() throws Exception {
+        RequestObject requestObject = new RequestObject(Operation.GET_ALL_PRODUCTS);
+        objectOutputStream.writeObject(requestObject);
+        objectOutputStream.flush();
+
+        ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
+        if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
+            return (List<Product>) responseObject.getData();
         }
-        return viewMain;
+        throw new Exception(responseObject.getErrorMessage());
     }
 
 }

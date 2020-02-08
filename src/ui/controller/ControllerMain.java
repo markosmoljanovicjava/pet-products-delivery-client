@@ -6,7 +6,6 @@
 package ui.controller;
 
 import controller.Controller;
-import domain.Product;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -16,6 +15,7 @@ import ui.view.ViewMain;
 import ui.view.ViewProduct;
 import ui.view.ViewProductMode;
 import ui.view.ViewProductSearch;
+import util.Keys;
 
 /**
  *
@@ -38,7 +38,7 @@ public class ControllerMain {
     private void init() throws IOException {
         viewMain.setLocationRelativeTo(null);
         viewMain.setExtendedState(ViewMain.MAXIMIZED_BOTH);
-        viewMain.setTitle(Controller.getInstance().getMap().get("user").toString());
+        viewMain.setTitle(Controller.getInstance().getMap().get(Keys.USER).toString());
     }
 
     private void addListeners() {
@@ -56,7 +56,11 @@ public class ControllerMain {
         viewMain.getjMenuItemProductSearch().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                controllerProductSearch = new ControllerProductSearch(new ViewProductSearch(viewMain, true));
+                try {
+                    controllerProductSearch = new ControllerProductSearch(new ViewProductSearch(viewMain, true));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 controllerProductSearch.open();
             }
         });
