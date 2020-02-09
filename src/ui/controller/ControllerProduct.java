@@ -167,7 +167,9 @@ public class ControllerProduct {
 
     private void fillTable() throws Exception {
         ProductsTableModel ptb = (ProductsTableModel) Controller.getInstance().getMap().get(Keys.PRODUCTS_TABLE_MODEL);
-        ptb.setProducts(Controller.getInstance().getAllProducts());
-        ptb.refreash();
+        if (ptb != null) {
+            ptb.setProducts(Controller.getInstance().getAllProducts());
+            ptb.refreash();
+        }
     }
 }
