@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import thread.ThreadLogin;
 import ui.view.ViewLogin;
+import ui.view.ViewMain;
 
 /**
  *
@@ -102,7 +103,7 @@ public class ControllerLogin {
             Controller.getInstance().login(user);
             threadLogin.interrupt();
             close();
-            new ControllerMain(Controller.getInstance().getViewMain()).open();
+            new ControllerMain(new ViewMain()).open();
         } catch (Exception ex) {
             ex.printStackTrace();
             viewLogin.getjLabelError().setText(ex.getMessage());

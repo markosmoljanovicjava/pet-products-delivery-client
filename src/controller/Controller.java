@@ -15,9 +15,9 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import transfer.RequestObject;
 import transfer.ResponseObject;
-import ui.view.ViewMain;
 import util.Keys;
 import util.Operation;
 import util.ResponseStatus;
@@ -33,7 +33,6 @@ public class Controller {
     private final Socket socket;
     private final ObjectOutputStream objectOutputStream;
     private final ObjectInputStream objectInputStream;
-    private ViewMain viewMain;
 
     private Controller() throws IOException {
         map = new HashMap<>();
@@ -51,13 +50,6 @@ public class Controller {
 
     public Map<Integer, Object> getMap() {
         return map;
-    }
-
-    public ViewMain getViewMain() {
-        if (viewMain == null) {
-            viewMain = new ViewMain();
-        }
-        return viewMain;
     }
 
     public void login(User user) throws Exception {
@@ -123,6 +115,20 @@ public class Controller {
         ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
         if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
             return (List<Product>) responseObject.getData();
+        }
+        throw new Exception(responseObject.getErrorMessage());
+    }
+
+    public Product deleteProduct(Product product) throws Exception {
+        RequestObject requestObject = new RequestObject(Operation.DELETE_PRODUCT, product);
+        objectOutputStream.writeObject(requestObject);
+        objectOutputStream.flush();
+
+        ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
+        if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
+            Product product1 = (Product) responseObject.getData();
+            JOptionPane.showMessageDialog(null, String.format("%s deleted!", product1));
+            return product1;
         }
         throw new Exception(responseObject.getErrorMessage());
     }

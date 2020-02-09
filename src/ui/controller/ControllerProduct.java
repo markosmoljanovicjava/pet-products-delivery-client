@@ -13,9 +13,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import ui.view.ProductsTableModel;
 import ui.view.ViewProduct;
 import ui.view.ViewProductMode;
@@ -68,7 +67,7 @@ public class ControllerProduct {
                     save();
                     init(ViewProductMode.VIEW);
                 } catch (Exception ex) {
-                    Logger.getLogger(ControllerProduct.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }
         });
@@ -78,7 +77,7 @@ public class ControllerProduct {
                 try {
                     init(ViewProductMode.UPDATE);
                 } catch (Exception ex) {
-                    Logger.getLogger(ControllerProduct.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }
         });
@@ -90,7 +89,22 @@ public class ControllerProduct {
                     fillTable();
                     init(ViewProductMode.VIEW);
                 } catch (Exception ex) {
-                    Logger.getLogger(ControllerProduct.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
+                }
+            }
+        });
+        viewProduct.getjButtonDelete().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int i = JOptionPane.showConfirmDialog(null, "Are you sure?");
+                    if (i == 0) {
+                        delete();
+                        fillTable();
+                        close();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         });
@@ -109,7 +123,7 @@ public class ControllerProduct {
                 viewProduct.getjComboBoxManufacturer().setEnabled(true);
                 break;
             case VIEW:
-                viewProduct.getjButtonDelete().setVisible(false);
+                viewProduct.getjButtonDelete().setVisible(true);
                 viewProduct.getjButtonUpdate().setVisible(false);
                 viewProduct.getjButtonSave().setVisible(false);
                 viewProduct.getjButtonSelect().setEnabled(false);
@@ -163,6 +177,16 @@ public class ControllerProduct {
         product.setPrice(new BigDecimal(viewProduct.getjTextFieldPrice().getText()));
         product.setManufacturer((Manufacturer) viewProduct.getjComboBoxManufacturer().getSelectedItem());
         Controller.getInstance().updateProduct(product);
+    }
+
+    private void delete() throws Exception {
+        Product product = new Product();
+        product.setId(Long.parseLong(viewProduct.getjTextFieldId().getText()));
+        product.setName(viewProduct.getjTextFieldName().getText());
+        product.setPrice(new BigDecimal(viewProduct.getjTextFieldPrice().getText()));
+        product.setManufacturer((Manufacturer) viewProduct.getjComboBoxManufacturer().getSelectedItem());
+        product.setId(Long.parseLong(viewProduct.getjTextFieldId().getText()));
+        Controller.getInstance().deleteProduct(product);
     }
 
     private void fillTable() throws Exception {

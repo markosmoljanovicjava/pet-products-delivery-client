@@ -69,7 +69,7 @@ public class ControllerProductSearch {
                             try {
                                 Controller.getInstance().getMap().put(Keys.PRODUCT, product);
                                 controllerProduct = new ControllerProduct(
-                                        new ViewProduct(Controller.getInstance().getViewMain(), true), ViewProductMode.VIEW);
+                                        new ViewProduct(null, true), ViewProductMode.VIEW);
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
