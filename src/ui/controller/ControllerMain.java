@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ui.view.ViewContract;
 import ui.view.ViewMain;
 import ui.view.ViewProduct;
 import ui.view.ViewProductMode;
@@ -26,6 +27,7 @@ public class ControllerMain {
     private final ViewMain viewMain;
     private ControllerProduct controllerProduct;
     private ControllerProductSearch controllerProductSearch;
+    private ControllerContract controllerContract;
 
     public ControllerMain(ViewMain viewMain) throws IOException {
         this.viewMain = viewMain;
@@ -62,6 +64,17 @@ public class ControllerMain {
                     ex.printStackTrace();
                 }
                 controllerProductSearch.open();
+            }
+        });
+        viewMain.getjMenuItemContractNew().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controllerContract = new ControllerContract(new ViewContract());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                controllerContract.open();
             }
         });
     }

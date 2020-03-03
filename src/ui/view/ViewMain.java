@@ -5,6 +5,8 @@
  */
 package ui.view;
 
+import javax.swing.JMenuItem;
+
 /**
  *
  * @author remar
@@ -31,6 +33,8 @@ public class ViewMain extends javax.swing.JFrame {
         jMenuProduct = new javax.swing.JMenu();
         jMenuItemProductNew = new javax.swing.JMenuItem();
         jMenuItemProductSearch = new javax.swing.JMenuItem();
+        jMenuContract = new javax.swing.JMenu();
+        jMenuItemContractNew = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,6 +47,13 @@ public class ViewMain extends javax.swing.JFrame {
         jMenuProduct.add(jMenuItemProductSearch);
 
         jMenuBar1.add(jMenuProduct);
+
+        jMenuContract.setText("Contract");
+
+        jMenuItemContractNew.setText("New");
+        jMenuContract.add(jMenuItemContractNew);
+
+        jMenuBar1.add(jMenuContract);
 
         setJMenuBar(jMenuBar1);
 
@@ -62,6 +73,8 @@ public class ViewMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuContract;
+    private javax.swing.JMenuItem jMenuItemContractNew;
     private javax.swing.JMenuItem jMenuItemProductNew;
     private javax.swing.JMenuItem jMenuItemProductSearch;
     private javax.swing.JMenu jMenuProduct;
@@ -74,4 +87,9 @@ public class ViewMain extends javax.swing.JFrame {
     public javax.swing.JMenuItem getjMenuItemProductSearch() {
         return jMenuItemProductSearch;
     }
+
+    public JMenuItem getjMenuItemContractNew() {
+        return jMenuItemContractNew;
+    }
+
 }
