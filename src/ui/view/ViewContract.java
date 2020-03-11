@@ -27,12 +27,16 @@ public class ViewContract extends javax.swing.JFrame {
         return jButtonAddItem;
     }
 
+    public JComboBox<String> getjComboBoxManufacturer() {
+        return jComboBoxManufacturer;
+    }
+
     public JButton getjButtonRemoveItem() {
         return jButtonRemoveItem;
     }
 
     public JButton getjButtonSelect() {
-        return jButtonSelect;
+        return jButtonCustomerSelect;
     }
 
     public JComboBox<String> getjComboBoxCustomer() {
@@ -106,9 +110,12 @@ public class ViewContract extends javax.swing.JFrame {
         jTextFieldDateExpiration = new javax.swing.JTextField();
         jTextFieldUser = new javax.swing.JTextField();
         jComboBoxCustomer = new javax.swing.JComboBox<>();
-        jButtonSelect = new javax.swing.JButton();
+        jButtonCustomerSelect = new javax.swing.JButton();
         jLabelAmount = new javax.swing.JLabel();
         jTextFieldAmount = new javax.swing.JTextField();
+        jLabelManufacturer = new javax.swing.JLabel();
+        jComboBoxManufacturer = new javax.swing.JComboBox<>();
+        jButtonManufacturerSelect = new javax.swing.JButton();
         jPanelProducts = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableProducts = new javax.swing.JTable();
@@ -162,11 +169,17 @@ public class ViewContract extends javax.swing.JFrame {
 
         jComboBoxCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButtonSelect.setText("Select");
+        jButtonCustomerSelect.setText("Select");
 
         jLabelAmount.setText("Amount");
 
         jTextFieldAmount.setEditable(false);
+
+        jLabelManufacturer.setText("Manufacturer:");
+
+        jComboBoxManufacturer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jButtonManufacturerSelect.setText("Select");
 
         javax.swing.GroupLayout jPanelContractLayout = new javax.swing.GroupLayout(jPanelContract);
         jPanelContract.setLayout(jPanelContractLayout);
@@ -178,6 +191,7 @@ public class ViewContract extends javax.swing.JFrame {
                     .addComponent(jButtonRemoveItem)
                     .addGroup(jPanelContractLayout.createSequentialGroup()
                         .addGroup(jPanelContractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabelManufacturer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelCustomer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelAmount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -186,16 +200,18 @@ public class ViewContract extends javax.swing.JFrame {
                             .addComponent(jLabelUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelContractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelContractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextFieldDateCreated)
-                                .addComponent(jTextFieldDateExpiration)
-                                .addComponent(jTextFieldAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                            .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldDateCreated)
+                            .addComponent(jTextFieldDateExpiration)
+                            .addComponent(jTextFieldAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                             .addComponent(jTextFieldUser)
-                            .addComponent(jComboBoxCustomer, 0, 235, Short.MAX_VALUE))
+                            .addComponent(jComboBoxCustomer, 0, 235, Short.MAX_VALUE)
+                            .addComponent(jComboBoxManufacturer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonSelect)
-                        .addGap(206, 206, 206)))
+                        .addGroup(jPanelContractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonManufacturerSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonCustomerSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(194, 194, 194)))
                 .addGap(0, 20, Short.MAX_VALUE))
         );
         jPanelContractLayout.setVerticalGroup(
@@ -225,12 +241,17 @@ public class ViewContract extends javax.swing.JFrame {
                 .addGroup(jPanelContractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCustomer)
                     .addComponent(jComboBoxCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSelect))
+                    .addComponent(jButtonCustomerSelect))
                 .addGap(18, 18, 18)
+                .addGroup(jPanelContractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelManufacturer)
+                    .addComponent(jComboBoxManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonManufacturerSelect))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRemoveItem)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanelProducts.setBorder(javax.swing.BorderFactory.createTitledBorder("Products"));
@@ -335,20 +356,20 @@ public class ViewContract extends javax.swing.JFrame {
                     .addComponent(jPanelContract, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanelProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanelProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanelProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanelProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelContract, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelContract, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanelProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanelProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -356,14 +377,17 @@ public class ViewContract extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddItem;
+    private javax.swing.JButton jButtonCustomerSelect;
+    private javax.swing.JButton jButtonManufacturerSelect;
     private javax.swing.JButton jButtonRemoveItem;
-    private javax.swing.JButton jButtonSelect;
     private javax.swing.JComboBox<String> jComboBoxCustomer;
+    private javax.swing.JComboBox<String> jComboBoxManufacturer;
     private javax.swing.JLabel jLabelAmount;
     private javax.swing.JLabel jLabelCustomer;
     private javax.swing.JLabel jLabelDateCreated;
     private javax.swing.JLabel jLabelDateExpiration;
     private javax.swing.JLabel jLabelID;
+    private javax.swing.JLabel jLabelManufacturer;
     private javax.swing.JLabel jLabelProductID;
     private javax.swing.JLabel jLabelProductName;
     private javax.swing.JLabel jLabelProductPrice;

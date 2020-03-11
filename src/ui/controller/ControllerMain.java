@@ -71,7 +71,7 @@ public class ControllerMain {
             public void actionPerformed(ActionEvent e) {
                 try {
                     controllerContract = new ControllerContract(new ViewContract());
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 controllerContract.open();
