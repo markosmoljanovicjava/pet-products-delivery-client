@@ -7,10 +7,14 @@ package ui.controller;
 
 import controller.Controller;
 import domain.Customer;
+import domain.Product;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.TableModel;
+import ui.view.ProductsTableModel;
 import ui.view.ViewContract;
 import util.Keys;
 
@@ -57,10 +61,16 @@ public class ControllerContract {
         viewContract.getjTextFieldDateExpiration().setText(new SimpleDateFormat("yyyy.MM.dd.").format(calendar.getTime()));
 
         fillCustomers();
+        fillProducts();
     }
 
     private void fillCustomers() throws Exception {
         List<Customer> customers = Controller.getInstance().getAllCustomers();
         viewContract.getjComboBoxCustomer().setModel(new DefaultComboBoxModel(customers.toArray()));
+    }
+
+    private void fillProducts() throws Exception {
+        List<Product> products = Controller.getInstance().getAllProducts();
+        viewContract.getjTableProducts().setModel(new ProductsTableModel(products));
     }
 }
