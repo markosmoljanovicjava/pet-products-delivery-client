@@ -5,6 +5,7 @@
  */
 package controller;
 
+import domain.Customer;
 import domain.Manufacturer;
 import domain.Product;
 import domain.User;
@@ -129,6 +130,18 @@ public class Controller {
             Product product1 = (Product) responseObject.getData();
             JOptionPane.showMessageDialog(null, String.format("%s deleted!", product1));
             return product1;
+        }
+        throw new Exception(responseObject.getErrorMessage());
+    }
+
+    public List<Customer> getAllCustomers() throws Exception {
+        RequestObject requestObject = new RequestObject(Operation.GET_ALL_CUSTOMERS);
+        objectOutputStream.writeObject(requestObject);
+        objectOutputStream.flush();
+
+        ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
+        if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
+            return (List<Customer>) responseObject.getData();
         }
         throw new Exception(responseObject.getErrorMessage());
     }

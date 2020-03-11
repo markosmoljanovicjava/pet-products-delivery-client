@@ -6,10 +6,11 @@
 package ui.controller;
 
 import controller.Controller;
-import java.io.IOException;
+import domain.Customer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import ui.view.ViewContract;
 import util.Keys;
 
@@ -21,7 +22,7 @@ public class ControllerContract {
 
     private final ViewContract viewContract;
 
-    public ControllerContract(ViewContract viewContract) throws IOException {
+    public ControllerContract(ViewContract viewContract) throws Exception {
         this.viewContract = viewContract;
 
         init();
@@ -29,10 +30,10 @@ public class ControllerContract {
         addListeners();
     }
 
-    private void init() throws IOException {
+    private void init() throws Exception {
         viewContract.setLocationRelativeTo(null);
         viewContract.setTitle("Contract");
-        
+
         fillForm();
     }
 
@@ -47,12 +48,19 @@ public class ControllerContract {
         viewContract.dispose();
     }
 
-    private void fillForm() throws IOException {
+    private void fillForm() throws Exception {
         viewContract.getjTextFieldUser().setText(Controller.getInstance().getMap().get(Keys.USER).toString());
-        
+
         Calendar calendar = Calendar.getInstance();
         viewContract.getjTextFieldDateCreated().setText(new SimpleDateFormat("yyyy.MM.dd.").format(calendar.getTime()));
         calendar.add(Calendar.YEAR, 1);
         viewContract.getjTextFieldDateExpiration().setText(new SimpleDateFormat("yyyy.MM.dd.").format(calendar.getTime()));
+
+        fillCustomers();
+    }
+
+    private void fillCustomers() throws Exception {
+        List<Customer> customers = Controller.getInstance().getAllCustomers();
+        viewContract.getjComboBoxCustomer().setModel(new DefaultComboBoxModel(customers.toArray()));
     }
 }
