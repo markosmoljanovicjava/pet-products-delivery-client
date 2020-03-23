@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
-import ui.view.ProductsTableModel;
+import ui.component.ProductsTableModel;
 import ui.view.ViewProduct;
 import ui.view.ViewProductMode;
 import ui.view.ViewProductSearch;

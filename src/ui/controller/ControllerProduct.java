@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import ui.view.ProductsTableModel;
+import ui.component.ProductsTableModel;
 import ui.view.ViewProduct;
 import ui.view.ViewProductMode;
 import util.Keys;

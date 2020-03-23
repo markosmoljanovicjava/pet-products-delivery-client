@@ -6,14 +6,19 @@
 package ui.controller;
 
 import controller.Controller;
+import domain.Contract;
 import domain.Customer;
 import domain.Manufacturer;
 import domain.Product;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import ui.view.ProductsTableModel;
+import ui.component.ContractTableModel;
+import ui.component.ProductsTableModel;
 import ui.view.ViewContract;
 import util.Keys;
 
@@ -24,6 +29,7 @@ import util.Keys;
 public class ControllerContract {
 
     private final ViewContract viewContract;
+    private Product product;
 
     public ControllerContract(ViewContract viewContract) throws Exception {
         this.viewContract = viewContract;
@@ -41,6 +47,48 @@ public class ControllerContract {
     }
 
     private void addListeners() {
+        viewContract.getjComboBoxManufacturer().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                product = new Product();
+                product.setManufacturer((Manufacturer) viewContract.getjComboBoxManufacturer().getSelectedItem());
+                try {
+                    fillProducts();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        viewContract.getjTableProducts().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                ProductsTableModel ptm = (ProductsTableModel) viewContract.getjTableProducts().getModel();
+                int rowIndex = viewContract.getjTableProducts().getSelectedRow();
+                if (rowIndex >= 0) {
+                    Product product1 = ptm.getProduct(rowIndex);
+                    viewContract.getjTextFieldProductID().setText(product1.getId().toString());
+                    viewContract.getjTextFieldProductName().setText(product1.getName());
+                    viewContract.getjTextFieldProductPrice().setText(product1.getPrice().toString());
+                    viewContract.getjTextFieldQuantity().setText("1");
+                    viewContract.getjTextFieldQuantity().grabFocus();
+                    viewContract.getjTextFieldQuantity().setSelectionStart(0);
+                }
+            }
+        });
+        viewContract.getjButtonAddItem().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ProductsTableModel ptm = (ProductsTableModel) viewContract.getjTableProducts().getModel();
+                int rowIndex = viewContract.getjTableProducts().getSelectedRow();
+                if (rowIndex >= 0) {
+                    ContractTableModel ctm = (ContractTableModel) viewContract.getjTableContractItems().getModel();
+                    Product product1 = ptm.getProduct(rowIndex);
+                    Long quantity = Long.valueOf(viewContract.getjTextFieldQuantity().getText().trim());
+                    ctm.addContractItem(product1, quantity);
+                    
+                }
+            }
+        });
     }
 
     public void open() {
@@ -61,7 +109,10 @@ public class ControllerContract {
 
         fillCustomers();
         fillManufacturers();
+        product = new Product();
+        product.setManufacturer((Manufacturer) viewContract.getjComboBoxManufacturer().getSelectedItem());
         fillProducts();
+        fillContractTable();
     }
 
     private void fillCustomers() throws Exception {
@@ -70,12 +121,16 @@ public class ControllerContract {
     }
 
     private void fillProducts() throws Exception {
-        List<Product> products = Controller.getInstance().getAllProducts();
+        List<Product> products = Controller.getInstance().getAllProductsForManufacturer(product);
         viewContract.getjTableProducts().setModel(new ProductsTableModel(products));
     }
 
     private void fillManufacturers() throws Exception {
         List<Manufacturer> manufacturers = Controller.getInstance().getAllManufacturers();
         viewContract.getjComboBoxManufacturer().setModel(new DefaultComboBoxModel(manufacturers.toArray()));
+    }
+
+    private void fillContractTable() {
+        viewContract.getjTableContractItems().setModel(new ContractTableModel(new Contract()));
     }
 }

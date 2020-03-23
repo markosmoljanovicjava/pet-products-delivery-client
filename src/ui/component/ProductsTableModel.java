@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.view;
+package ui.component;
 
 import domain.Product;
 import java.util.List;
@@ -60,6 +60,10 @@ public class ProductsTableModel extends AbstractTableModel {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public Product getProduct(int index) {
+        return products.get(index);
     }
 
 }

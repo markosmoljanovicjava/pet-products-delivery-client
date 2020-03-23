@@ -146,4 +146,16 @@ public class Controller {
         throw new Exception(responseObject.getErrorMessage());
     }
 
+    public List<Product> getAllProductsForManufacturer(Product product) throws Exception {
+        RequestObject requestObject = new RequestObject(Operation.GET_ALL_PRODUCST_FOR_MANUFACTURER, product);
+        objectOutputStream.writeObject(requestObject);
+        objectOutputStream.flush();
+
+        ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
+        if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
+            return (List<Product>) responseObject.getData();
+        }
+        throw new Exception(responseObject.getErrorMessage());
+    }
+
 }
