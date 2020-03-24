@@ -63,10 +63,43 @@ public class ContractTableModel extends AbstractTableModel {
         contractItem.setItemNumber(Long.valueOf(contract.getContractItems().size() + 1));
         contractItem.setProduct(product1);
         contractItem.setPrice(product1.getPrice());
+        for (ContractItem contractItem1 : contract.getContractItems()) {
+            if (contractItem1.equals(contractItem)) {
+                contractItem1.setQuantity(contractItem1.getQuantity() + quantity);
+                setContractAmount();
+                fireTableDataChanged();
+                return;
+            }
+        }
         contractItem.setQuantity(quantity);
         contract.getContractItems().add(contractItem);
-        contract.setAmount(contract.getAmount().add(product1.getPrice().multiply(new BigDecimal(contractItem.getQuantity()))));
+        setContractAmount();
         fireTableDataChanged();
+    }
+
+    public void removeContractItem(int rowIndex) {
+        contract.getContractItems().remove(rowIndex);
+        setItemNumbers();
+        setContractAmount();
+        fireTableDataChanged();
+    }
+
+    private void setItemNumbers() {
+        int i = 0;
+        for (ContractItem contractItem : contract.getContractItems()) {
+            contractItem.setItemNumber(Long.valueOf(++i));
+        }
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    private void setContractAmount() {
+        contract.setAmount(new BigDecimal(0));
+        for (ContractItem contractItem : contract.getContractItems()) {
+            contract.setAmount(contract.getAmount().add(contractItem.getPrice().multiply(new BigDecimal(contractItem.getQuantity()))));
+        }
     }
 
 }

@@ -18,5 +18,8 @@ public class Main {
         ControllerLogin controllerLogin = new ControllerLogin(new ViewLogin());
         controllerLogin.open();
     }
-
+    
+    // JOptionPane da li ste sigurni da zelite da obrisete prozivod
+    // Save Contract
+    // ProductsTableModel izmena preko tabele; i za ContarctTableModel
 }

@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import ui.component.ContractTableModel;
 import ui.component.ProductsTableModel;
 import ui.view.ViewContract;
@@ -33,6 +34,8 @@ public class ControllerContract {
 
     public ControllerContract(ViewContract viewContract) throws Exception {
         this.viewContract = viewContract;
+        
+        product = new Product();
 
         init();
 
@@ -43,6 +46,7 @@ public class ControllerContract {
         viewContract.setLocationRelativeTo(null);
         viewContract.setTitle("Contract");
 
+        prepareForm();
         fillForm();
     }
 
@@ -85,7 +89,22 @@ public class ControllerContract {
                     Product product1 = ptm.getProduct(rowIndex);
                     Long quantity = Long.valueOf(viewContract.getjTextFieldQuantity().getText().trim());
                     ctm.addContractItem(product1, quantity);
-                    
+                    viewContract.getjTextFieldAmount().setText(ctm.getContract().getAmount().toString());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please select Product!");
+                }
+            }
+        });
+        viewContract.getjButtonRemoveItem().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ContractTableModel ctm = (ContractTableModel) viewContract.getjTableContractItems().getModel();
+                int rowIndex = viewContract.getjTableContractItems().getSelectedRow();
+                if (rowIndex >= 0) {
+                    ctm.removeContractItem(rowIndex);
+                    viewContract.getjTextFieldAmount().setText(ctm.getContract().getAmount().toString());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please select Contract Item!");
                 }
             }
         });
@@ -109,7 +128,6 @@ public class ControllerContract {
 
         fillCustomers();
         fillManufacturers();
-        product = new Product();
         product.setManufacturer((Manufacturer) viewContract.getjComboBoxManufacturer().getSelectedItem());
         fillProducts();
         fillContractTable();
@@ -132,5 +150,12 @@ public class ControllerContract {
 
     private void fillContractTable() {
         viewContract.getjTableContractItems().setModel(new ContractTableModel(new Contract()));
+    }
+
+    private void prepareForm() {
+        viewContract.getjTextFieldAmount().setText("0");
+        viewContract.getjTextFieldProductID().setEditable(false);
+        viewContract.getjTextFieldProductName().setEditable(false);
+        viewContract.getjTextFieldProductPrice().setEditable(false);
     }
 }
