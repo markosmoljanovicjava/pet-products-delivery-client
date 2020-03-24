@@ -10,9 +10,13 @@ import domain.Contract;
 import domain.Customer;
 import domain.Manufacturer;
 import domain.Product;
+import domain.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -34,7 +38,7 @@ public class ControllerContract {
 
     public ControllerContract(ViewContract viewContract) throws Exception {
         this.viewContract = viewContract;
-        
+
         product = new Product();
 
         init();
@@ -106,6 +110,27 @@ public class ControllerContract {
                 } else {
                     JOptionPane.showMessageDialog(null, "Please select Contract Item!");
                 }
+            }
+        });
+        viewContract.getjButtonSave().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ContractTableModel ctm = (ContractTableModel) viewContract.getjTableContractItems().getModel();
+                Contract contract = ctm.getContract();
+                contract.setAmount(new BigDecimal(viewContract.getjTextFieldAmount().getText()));
+                contract.setCustomer((Customer) viewContract.getjComboBoxCustomer().getSelectedItem());
+                try {
+                    contract.setDateCreation(new SimpleDateFormat("yyyy.MM.dd.").parse(viewContract.getjTextFieldDateCreated().getText()));
+                    contract.setDateExpiration(new SimpleDateFormat("yyyy.MM.dd.").parse(viewContract.getjTextFieldDateExpiration().getText()));
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+                try {
+                    contract.setUser((User) Controller.getInstance().getMap().get(Keys.USER));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(null, contract);
             }
         });
     }

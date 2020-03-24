@@ -129,6 +129,7 @@ public class ViewContract extends javax.swing.JFrame {
         jTextFieldProductPrice = new javax.swing.JTextField();
         jTextFieldQuantity = new javax.swing.JTextField();
         jButtonAddItem = new javax.swing.JButton();
+        jButtonSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -350,6 +351,9 @@ public class ViewContract extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButtonSave.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButtonSave.setText("Save");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -359,10 +363,12 @@ public class ViewContract extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelContract, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanelProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 514, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanelProducts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanelProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(110, 110, 110)
+                                .addComponent(jButtonSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanelProducts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -373,7 +379,11 @@ public class ViewContract extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanelProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -385,6 +395,7 @@ public class ViewContract extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCustomerSelect;
     private javax.swing.JButton jButtonManufacturerSelect;
     private javax.swing.JButton jButtonRemoveItem;
+    private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox<String> jComboBoxCustomer;
     private javax.swing.JComboBox<String> jComboBoxManufacturer;
     private javax.swing.JLabel jLabelAmount;
@@ -415,4 +426,8 @@ public class ViewContract extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldQuantity;
     private javax.swing.JTextField jTextFieldUser;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton getjButtonSave() {
+        return jButtonSave;
+    }
 }
