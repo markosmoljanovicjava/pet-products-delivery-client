@@ -5,6 +5,7 @@
  */
 package controller;
 
+import domain.Contract;
 import domain.Customer;
 import domain.Manufacturer;
 import domain.Product;
@@ -154,6 +155,19 @@ public class Controller {
         ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
         if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
             return (List<Product>) responseObject.getData();
+        }
+        throw new Exception(responseObject.getErrorMessage());
+    }
+
+    public Contract saveContract(Contract contract) throws Exception {
+        RequestObject requestObject = new RequestObject(Operation.SAVE_CONTRACT, contract);
+        objectOutputStream.writeObject(requestObject);
+        objectOutputStream.flush();
+
+        ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
+        if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
+            Contract contract1 = (Contract) responseObject.getData();
+            return contract1;
         }
         throw new Exception(responseObject.getErrorMessage());
     }

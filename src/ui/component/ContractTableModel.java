@@ -60,6 +60,7 @@ public class ContractTableModel extends AbstractTableModel {
 
     public void addContractItem(Product product1, Long quantity) {
         ContractItem contractItem = new ContractItem();
+        contractItem.setContract(contract);
         contractItem.setItemNumber(Long.valueOf(contract.getContractItems().size() + 1));
         contractItem.setProduct(product1);
         contractItem.setPrice(product1.getPrice());

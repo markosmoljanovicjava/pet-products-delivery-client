@@ -20,6 +20,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import ui.component.ContractTableModel;
@@ -130,7 +132,12 @@ public class ControllerContract {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                JOptionPane.showMessageDialog(null, contract);
+                try {
+                    Contract contract1 = Controller.getInstance().saveContract(contract);
+                    JOptionPane.showMessageDialog(null, contract1);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }
