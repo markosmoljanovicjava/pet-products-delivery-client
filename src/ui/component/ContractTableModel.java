@@ -18,7 +18,7 @@ import javax.swing.table.AbstractTableModel;
 public class ContractTableModel extends AbstractTableModel {
 
     private final Contract contract;
-    private final String[] colNames = {"Order No", "Product", "Price", "Quantity", "Total"};
+    private final String[] colNames = {"Order No", "Product", "Price", "Quantity", "Amount"};
 
     public ContractTableModel(Contract contract) {
         this.contract = contract;
@@ -47,7 +47,7 @@ public class ContractTableModel extends AbstractTableModel {
             case 3:
                 return contractItem.getQuantity();
             case 4:
-                return contractItem.getPrice().multiply(new BigDecimal(contractItem.getQuantity()));
+                return contractItem.getAmount();
             default:
                 return "n/a";
         }
@@ -66,12 +66,14 @@ public class ContractTableModel extends AbstractTableModel {
         for (ContractItem contractItem1 : contract.getContractItems()) {
             if (contractItem1.equals(contractItem)) {
                 contractItem1.setQuantity(contractItem1.getQuantity() + quantity);
+                contractItem1.setAmount(contractItem.getPrice().multiply(new BigDecimal(contractItem.getQuantity())));
                 setContractAmount();
                 fireTableDataChanged();
                 return;
             }
         }
         contractItem.setQuantity(quantity);
+        contractItem.setAmount(contractItem.getPrice().multiply(new BigDecimal(contractItem.getQuantity())));
         contract.getContractItems().add(contractItem);
         setContractAmount();
         fireTableDataChanged();
@@ -98,7 +100,7 @@ public class ContractTableModel extends AbstractTableModel {
     private void setContractAmount() {
         contract.setAmount(new BigDecimal(0));
         for (ContractItem contractItem : contract.getContractItems()) {
-            contract.setAmount(contract.getAmount().add(contractItem.getPrice().multiply(new BigDecimal(contractItem.getQuantity()))));
+            contract.setAmount(contract.getAmount().add(contractItem.getAmount()));
         }
     }
 
