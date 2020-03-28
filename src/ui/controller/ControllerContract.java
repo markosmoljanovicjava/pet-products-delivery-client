@@ -20,8 +20,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import ui.component.ContractTableModel;
@@ -60,12 +58,20 @@ public class ControllerContract {
         viewContract.getjComboBoxManufacturer().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                product = new Product();
-                product.setManufacturer((Manufacturer) viewContract.getjComboBoxManufacturer().getSelectedItem());
-                try {
-                    fillProducts();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                ContractTableModel ctm = (ContractTableModel) viewContract.getjTableContractItems().getModel();
+                int i = 0;
+                if (!ctm.getContract().getContractItems().isEmpty()) {
+                    i = JOptionPane.showConfirmDialog(null, "Are u sure? Products u already selected will be lost!");
+                }
+                if (i == 0) {
+                    viewContract.getjTableContractItems().setModel(new ContractTableModel(new Contract()));
+                    product = new Product();
+                    product.setManufacturer((Manufacturer) viewContract.getjComboBoxManufacturer().getSelectedItem());
+                    try {
+                        fillProducts();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });

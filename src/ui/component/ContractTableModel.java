@@ -67,7 +67,7 @@ public class ContractTableModel extends AbstractTableModel {
         for (ContractItem contractItem1 : contract.getContractItems()) {
             if (contractItem1.equals(contractItem)) {
                 contractItem1.setQuantity(contractItem1.getQuantity() + quantity);
-                contractItem1.setAmount(contractItem.getPrice().multiply(new BigDecimal(contractItem.getQuantity())));
+                contractItem1.setAmount(contractItem.getPrice().multiply(new BigDecimal(contractItem1.getQuantity())));
                 setContractAmount();
                 fireTableDataChanged();
                 return;
