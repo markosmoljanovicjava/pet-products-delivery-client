@@ -108,6 +108,7 @@ public class ControllerProduct {
                 try {
                     update();
                     fillTable();
+                    JOptionPane.showMessageDialog(null, "Product is updated!");
                     init(ViewProductMode.VIEW);
                 } catch (Exception ex) {
                     ex.printStackTrace();
