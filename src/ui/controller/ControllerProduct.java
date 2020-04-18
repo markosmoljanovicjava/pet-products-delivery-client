@@ -123,6 +123,7 @@ public class ControllerProduct {
                     if (i == 0) {
                         delete();
                         fillTable();
+                        JOptionPane.showMessageDialog(null, "Product is deleted!");
                         close();
                     }
                 } catch (Exception ex) {

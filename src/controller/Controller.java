@@ -129,7 +129,6 @@ public class Controller {
         ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
         if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
             Product product1 = (Product) responseObject.getData();
-            JOptionPane.showMessageDialog(null, String.format("%s deleted!", product1));
             return product1;
         }
         throw new Exception(responseObject.getErrorMessage());

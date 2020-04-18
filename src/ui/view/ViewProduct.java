@@ -153,7 +153,7 @@ public class ViewProduct extends javax.swing.JDialog {
                         .addComponent(jButtonCancel)
                         .addGap(57, 57, 57)
                         .addComponent(jButtonEnableChanges)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonDelete)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonUpdate)
