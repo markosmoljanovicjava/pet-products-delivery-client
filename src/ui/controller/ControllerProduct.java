@@ -15,7 +15,6 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
@@ -24,7 +23,9 @@ import ui.component.ProductsTableModel;
 import ui.view.ViewProduct;
 import ui.view.ViewProductMode;
 import util.Keys;
-import validator.impl.BigDecimalValidator;
+import validator.impl.ProductNameRegexValidator;
+import validator.impl.ProductPriceBigDecimalValidator;
+import validator.util.RegexTuple;
 
 /**
  *
@@ -129,7 +130,7 @@ public class ControllerProduct {
             @Override
             public void keyReleased(KeyEvent e) {
                 try {
-                    new BigDecimalValidator().validate(viewProduct.getjTextFieldPrice().getText());
+                    new ProductPriceBigDecimalValidator().validate(viewProduct.getjTextFieldPrice().getText());
                     viewProduct.getjLabelErrorPrice().setText("");
                     validation.put(viewProduct.getjTextFieldPrice().getName(), true);
                     validate();
@@ -144,7 +145,8 @@ public class ControllerProduct {
             @Override
             public void keyReleased(KeyEvent e) {
                 try {
-                    new BigDecimalValidator().validate(viewProduct.getjTextFieldName().getText());
+                    new ProductNameRegexValidator().validate(
+                            new RegexTuple("^[A-Za-z0-9_-]+$", viewProduct.getjTextFieldName().getText()));
                     viewProduct.getjLabelErrorName().setText("");
                     validation.put(viewProduct.getjTextFieldName().getName(), true);
                     validate();

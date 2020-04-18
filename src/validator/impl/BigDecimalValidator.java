@@ -12,14 +12,16 @@ import validator.Validator;
  *
  * @author marko
  */
-public class BigDecimalValidator implements Validator {
+public abstract class BigDecimalValidator implements Validator {
 
+    protected String message;
+    
     @Override
     public void validate(Object object) throws Exception {
         try {
             new BigDecimal(object.toString());
         } catch (NumberFormatException exception) {
-            throw new NumberFormatException("Value must be decimal number!");
+            throw new NumberFormatException(message);
         }
     }
 }
