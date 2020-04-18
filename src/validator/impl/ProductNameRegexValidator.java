@@ -12,7 +12,7 @@ package validator.impl;
 public class ProductNameRegexValidator extends RegexValidator{
 
     public ProductNameRegexValidator() {
-        message = "Product name must contains only [letters, digits, _, -]";
+        message = "Product name must contain only [letters, digits, _, -]";
     }
     
 }
