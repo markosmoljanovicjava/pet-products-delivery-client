@@ -14,9 +14,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import ui.component.ProductsTableModel;
@@ -32,9 +33,19 @@ import validator.impl.BigDecimalValidator;
 public class ControllerProduct {
 
     private final ViewProduct viewProduct;
+    private final Map<String, Boolean> validation;
 
     public ControllerProduct(ViewProduct viewProduct, ViewProductMode viewProductMode) throws Exception {
         this.viewProduct = viewProduct;
+
+        setNamesForValidation();
+
+        validation = new HashMap() {
+            {
+                put(viewProduct.getjTextFieldName().getName(), false);
+                put(viewProduct.getjTextFieldPrice().getName(), false);
+            }
+        };
 
         init(viewProductMode);
 
@@ -120,10 +131,27 @@ public class ControllerProduct {
                 try {
                     new BigDecimalValidator().validate(viewProduct.getjTextFieldPrice().getText());
                     viewProduct.getjLabelErrorPrice().setText("");
-                    viewProduct.getjButtonSave().setEnabled(true);
+                    validation.put(viewProduct.getjTextFieldPrice().getName(), true);
+                    validate();
                 } catch (Exception ex) {
                     viewProduct.getjLabelErrorPrice().setText(ex.getMessage());
-                    viewProduct.getjButtonSave().setEnabled(false);
+                    validation.put(viewProduct.getjTextFieldPrice().getName(), false);
+                    validate();
+                }
+            }
+        });
+        viewProduct.getjTextFieldName().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    new BigDecimalValidator().validate(viewProduct.getjTextFieldName().getText());
+                    viewProduct.getjLabelErrorName().setText("");
+                    validation.put(viewProduct.getjTextFieldName().getName(), true);
+                    validate();
+                } catch (Exception ex) {
+                    viewProduct.getjLabelErrorName().setText(ex.getMessage());
+                    validation.put(viewProduct.getjTextFieldName().getName(), false);
+                    validate();
                 }
             }
         });
@@ -214,6 +242,21 @@ public class ControllerProduct {
         if (ptb != null) {
             ptb.setProducts(Controller.getInstance().getAllProducts());
             ptb.refreash();
+        }
+    }
+
+    private void setNamesForValidation() {
+        viewProduct.getjTextFieldName().setName("Name");
+        viewProduct.getjTextFieldPrice().setName("Price");
+    }
+
+    private void validate() {
+        viewProduct.getjButtonSave().setEnabled(true);
+        for (String key : validation.keySet()) {
+            if (!validation.get(key)) {
+                viewProduct.getjButtonSave().setEnabled(false);
+                return;
+            }
         }
     }
 }
