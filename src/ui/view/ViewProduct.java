@@ -39,7 +39,6 @@ public class ViewProduct extends javax.swing.JDialog {
         jTextFieldName = new javax.swing.JTextField();
         jTextFieldPrice = new javax.swing.JTextField();
         jComboBoxManufacturer = new javax.swing.JComboBox<>();
-        jButtonSelect = new javax.swing.JButton();
         jLabelErrorPrice = new javax.swing.JLabel();
         jLabelErrorName = new javax.swing.JLabel();
         jLabelErrorId = new javax.swing.JLabel();
@@ -62,8 +61,6 @@ public class ViewProduct extends javax.swing.JDialog {
         jLabelManufacturer.setText("Manufacturer:");
 
         jComboBoxManufacturer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButtonSelect.setText("Select");
 
         jLabelErrorPrice.setForeground(new java.awt.Color(255, 0, 51));
 
@@ -98,8 +95,7 @@ public class ViewProduct extends javax.swing.JDialog {
                                 .addComponent(jLabelManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBoxManufacturer, 0, 254, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonSelect)))
+                                .addGap(71, 71, 71)))
                         .addGap(8, 8, 8)))
                 .addContainerGap())
         );
@@ -127,9 +123,8 @@ public class ViewProduct extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelNewProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelManufacturer)
-                    .addComponent(jComboBoxManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSelect))
-                .addContainerGap(72, Short.MAX_VALUE))
+                    .addComponent(jComboBoxManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jButtonCancel.setText("Cancel");
@@ -167,7 +162,7 @@ public class ViewProduct extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelNewProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancel)
                     .addComponent(jButtonEnableChanges)
@@ -185,7 +180,6 @@ public class ViewProduct extends javax.swing.JDialog {
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonEnableChanges;
     private javax.swing.JButton jButtonSave;
-    private javax.swing.JButton jButtonSelect;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JComboBox<String> jComboBoxManufacturer;
     private javax.swing.JLabel jLabelErrorId;
@@ -215,10 +209,6 @@ public class ViewProduct extends javax.swing.JDialog {
 
     public javax.swing.JButton getjButtonSave() {
         return jButtonSave;
-    }
-
-    public javax.swing.JButton getjButtonSelect() {
-        return jButtonSelect;
     }
 
     public javax.swing.JButton getjButtonUpdate() {

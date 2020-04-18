@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import ui.component.ProductsTableModel;
 import ui.view.ViewProduct;
 import ui.view.ViewProductMode;
@@ -64,6 +65,8 @@ public class ControllerProduct {
     private void init(ViewProductMode viewProductMode) throws Exception {
         viewProduct.setLocationRelativeTo(null);
         viewProduct.setTitle("Product");
+
+        AutoCompleteDecorator.decorate(viewProduct.getjComboBoxManufacturer());
 
         fillManufacturers();
 
@@ -176,7 +179,6 @@ public class ControllerProduct {
                 viewProduct.getjButtonDelete().setVisible(true);
                 viewProduct.getjButtonUpdate().setVisible(false);
                 viewProduct.getjButtonSave().setVisible(false);
-                viewProduct.getjButtonSelect().setEnabled(false);
                 viewProduct.getjButtonEnableChanges().setVisible(true);
                 viewProduct.getjTextFieldId().setEditable(false);
                 viewProduct.getjTextFieldName().setEditable(false);
@@ -189,7 +191,6 @@ public class ControllerProduct {
                 viewProduct.getjButtonUpdate().setVisible(true);
                 viewProduct.getjButtonEnableChanges().setVisible(false);
                 viewProduct.getjButtonSave().setVisible(false);
-                viewProduct.getjButtonSelect().setEnabled(true);
                 viewProduct.getjTextFieldId().setEditable(false);
                 viewProduct.getjTextFieldName().setEditable(true);
                 viewProduct.getjTextFieldPrice().setEditable(true);
