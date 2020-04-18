@@ -10,6 +10,8 @@ import domain.Manufacturer;
 import domain.Product;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
@@ -65,6 +67,7 @@ public class ControllerProduct {
             public void actionPerformed(ActionEvent ae) {
                 try {
                     save();
+                    JOptionPane.showMessageDialog(null, "Product is saved!");
                     init(ViewProductMode.VIEW);
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -105,6 +108,17 @@ public class ControllerProduct {
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                }
+            }
+        });
+        viewProduct.getjTextFieldPrice().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    new BigDecimal(viewProduct.getjTextFieldPrice().getText());
+                    viewProduct.getjLabelErrorPrice().setText("");
+                } catch (NumberFormatException ex) {
+                    viewProduct.getjLabelErrorPrice().setText("You must enter decimal number");
                 }
             }
         });
