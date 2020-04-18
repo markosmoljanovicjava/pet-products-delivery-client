@@ -15,12 +15,15 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import ui.component.ProductsTableModel;
 import ui.view.ViewProduct;
 import ui.view.ViewProductMode;
 import util.Keys;
+import validator.impl.BigDecimalValidator;
 
 /**
  *
@@ -115,10 +118,12 @@ public class ControllerProduct {
             @Override
             public void keyReleased(KeyEvent e) {
                 try {
-                    new BigDecimal(viewProduct.getjTextFieldPrice().getText());
+                    new BigDecimalValidator().validate(viewProduct.getjTextFieldPrice().getText());
                     viewProduct.getjLabelErrorPrice().setText("");
-                } catch (NumberFormatException ex) {
-                    viewProduct.getjLabelErrorPrice().setText("You must enter decimal number");
+                    viewProduct.getjButtonSave().setEnabled(true);
+                } catch (Exception ex) {
+                    viewProduct.getjLabelErrorPrice().setText(ex.getMessage());
+                    viewProduct.getjButtonSave().setEnabled(false);
                 }
             }
         });
@@ -131,6 +136,7 @@ public class ControllerProduct {
                 viewProduct.getjButtonUpdate().setVisible(false);
                 viewProduct.getjButtonEnableChanges().setVisible(false);
                 viewProduct.getjButtonSave().setVisible(true);
+                viewProduct.getjButtonSave().setEnabled(false);
                 viewProduct.getjTextFieldId().setEditable(false);
                 viewProduct.getjTextFieldName().setEditable(true);
                 viewProduct.getjTextFieldPrice().setEditable(true);
