@@ -93,17 +93,12 @@
                       <Component id="jComboBoxCustomer" alignment="0" pref="235" max="32767" attributes="0"/>
                       <Component id="jComboBoxManufacturer" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButtonManufacturerSelect" max="32767" attributes="0"/>
-                      <Component id="jButtonCustomerSelect" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="194" pref="328" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="813" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -144,13 +139,11 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonCustomerSelect" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelManufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxManufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonManufacturerSelect" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" pref="191" max="32767" attributes="0"/>
@@ -248,11 +241,6 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonCustomerSelect">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Select"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabelAmount">
           <Properties>
             <Property name="text" type="java.lang.String" value="Amount"/>
@@ -282,11 +270,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonManufacturerSelect">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Select"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

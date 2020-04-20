@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import ui.component.ContractTableModel;
 import ui.component.ProductsTableModel;
 import ui.view.ViewContract;
@@ -52,6 +53,9 @@ public class ControllerContract {
     private void init() throws Exception {
         viewContract.setLocationRelativeTo(null);
         viewContract.setTitle("Contract");
+        
+        AutoCompleteDecorator.decorate(viewContract.getjComboBoxManufacturer());
+        AutoCompleteDecorator.decorate(viewContract.getjComboBoxCustomer());
 
         prepareForm();
         fillForm();
@@ -75,6 +79,7 @@ public class ControllerContract {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
+                    viewContract.getjTextFieldAmount().setText("0");
                     viewContract.getjTextFieldProductID().setText("");
                     viewContract.getjTextFieldProductName().setText("");
                     viewContract.getjTextFieldProductPrice().setText("");
