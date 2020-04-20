@@ -75,6 +75,10 @@ public class ControllerContract {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
+                    viewContract.getjTextFieldProductID().setText("");
+                    viewContract.getjTextFieldProductName().setText("");
+                    viewContract.getjTextFieldProductPrice().setText("");
+                    viewContract.getjTextFieldQuantity().setText("");
                 }
             }
         });
@@ -97,16 +101,21 @@ public class ControllerContract {
         viewContract.getjButtonAddItem().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProductsTableModel ptm = (ProductsTableModel) viewContract.getjTableProducts().getModel();
-                int rowIndex = viewContract.getjTableProducts().getSelectedRow();
-                if (rowIndex >= 0) {
-                    ContractTableModel ctm = (ContractTableModel) viewContract.getjTableContractItems().getModel();
-                    Product product1 = ptm.getProduct(rowIndex);
-                    Long quantity = Long.valueOf(viewContract.getjTextFieldQuantity().getText().trim());
-                    ctm.addContractItem(product1, quantity);
-                    viewContract.getjTextFieldAmount().setText(ctm.getContract().getAmount().toString());
-                } else {
-                    JOptionPane.showMessageDialog(null, "Please select Product!");
+                try {
+                    ProductsTableModel ptm = (ProductsTableModel) viewContract.getjTableProducts().getModel();
+                    int rowIndex = viewContract.getjTableProducts().getSelectedRow();
+                    if (rowIndex >= 0) {
+                        ContractTableModel ctm = (ContractTableModel) viewContract.getjTableContractItems().getModel();
+                        Product product1 = ptm.getProduct(rowIndex);
+                        Long quantity = Long.valueOf(viewContract.getjTextFieldQuantity().getText().trim());
+                        ctm.addContractItem(product1, quantity);
+                        viewContract.getjTextFieldAmount().setText(ctm.getContract().getAmount().toString());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please select product!");
+                    }
+                } catch (Exception ex) {
+                    // (1)
+                    JOptionPane.showMessageDialog(null, "You must to click on desired product!");
                 }
             }
         });
@@ -127,6 +136,10 @@ public class ControllerContract {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ContractTableModel ctm = (ContractTableModel) viewContract.getjTableContractItems().getModel();
+                if (ctm.getContract().getContractItems().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "U can not save contract with 0 items!");
+                    return;
+                }
                 Contract contract = ctm.getContract();
                 contract.setAmount(new BigDecimal(viewContract.getjTextFieldAmount().getText()));
                 contract.setCustomer((Customer) viewContract.getjComboBoxCustomer().getSelectedItem());
@@ -144,6 +157,7 @@ public class ControllerContract {
                 try {
                     Contract contract1 = Controller.getInstance().saveContract(contract);
                     JOptionPane.showMessageDialog(null, "Contract is saved!");
+                    viewContract.dispose();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

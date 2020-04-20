@@ -1,0 +1,1 @@
+(1) ovo sam stavio, jer ako se kline na red i ne pusti mis dok je kursor na tom redu - izvrsi se druga selekcija
