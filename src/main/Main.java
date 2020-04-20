@@ -22,4 +22,6 @@ public class Main {
     // JOptionPane da li ste sigurni da zelite da obrisete prozivod
     // Save Contract
     // ProductsTableModel izmena preko tabele; i za ContarctTableModel
+    // Obradidit izuzetke sto se tice konekcije
+    // srediti property i config za konekciju
 }
