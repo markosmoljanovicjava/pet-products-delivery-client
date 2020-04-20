@@ -96,6 +96,8 @@ public class ControllerProduct {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 try {
+                    validation.put(viewProduct.getjTextFieldName().getName(), true);
+                    validation.put(viewProduct.getjTextFieldPrice().getName(), true);
                     init(ViewProductMode.UPDATE);
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -151,7 +153,7 @@ public class ControllerProduct {
             public void keyReleased(KeyEvent e) {
                 try {
                     new ProductNameRegexValidator().validate(
-                            new RegexTuple("^[A-Za-z0-9_-]+$", viewProduct.getjTextFieldName().getText()));
+                            new RegexTuple("^[A-Za-z0-9 _-]+$", viewProduct.getjTextFieldName().getText()));
                     viewProduct.getjLabelErrorName().setText("");
                     validation.put(viewProduct.getjTextFieldName().getName(), true);
                     validate();
@@ -197,6 +199,7 @@ public class ControllerProduct {
                 viewProduct.getjTextFieldName().setEditable(true);
                 viewProduct.getjTextFieldPrice().setEditable(true);
                 viewProduct.getjComboBoxManufacturer().setEnabled(true);
+                viewProduct.getjButtonUpdate().setEnabled(false);
                 fillProduct();
                 break;
         }
@@ -257,9 +260,11 @@ public class ControllerProduct {
 
     private void validate() {
         viewProduct.getjButtonSave().setEnabled(true);
+        viewProduct.getjButtonUpdate().setEnabled(true);
         for (String key : validation.keySet()) {
             if (!validation.get(key)) {
                 viewProduct.getjButtonSave().setEnabled(false);
+                viewProduct.getjButtonUpdate().setEnabled(false);
                 return;
             }
         }
