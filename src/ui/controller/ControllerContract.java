@@ -13,6 +13,8 @@ import domain.Product;
 import domain.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -26,6 +28,7 @@ import ui.component.ContractTableModel;
 import ui.component.ProductsTableModel;
 import ui.view.ViewContract;
 import util.Keys;
+import validator.impl.ProductQuantityPositiveLongValidator;
 
 /**
  *
@@ -140,11 +143,25 @@ public class ControllerContract {
                 }
                 try {
                     Contract contract1 = Controller.getInstance().saveContract(contract);
-                    JOptionPane.showMessageDialog(null, contract1);
+                    JOptionPane.showMessageDialog(null, "Contract is saved!");
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
+        });
+        viewContract.getjTextFieldQuantity().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    new ProductQuantityPositiveLongValidator().validate(viewContract.getjTextFieldQuantity().getText());
+                    viewContract.getjLabelErrorQuantity().setText("");
+                    viewContract.getjButtonAddItem().setEnabled(true);
+                } catch (Exception ex) {
+                    viewContract.getjLabelErrorQuantity().setText(ex.getMessage());
+                    viewContract.getjButtonAddItem().setEnabled(false);
+                }
+            }
+
         });
     }
 
