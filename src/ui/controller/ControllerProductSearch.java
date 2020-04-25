@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,13 +35,11 @@ import validator.util.RegexTuple;
 public class ControllerProductSearch {
 
     private final ViewProductSearch viewProductSearch;
-    private final List<Product> products;
     private ControllerProduct controllerProduct;
     private final Map<String, Boolean> validation;
 
     public ControllerProductSearch(ViewProductSearch viewProductSearch) throws Exception {
         this.viewProductSearch = viewProductSearch;
-        products = Controller.getInstance().getAllProducts();
 
         setNamesForValidation();
         validation = new HashMap() {
@@ -70,7 +69,7 @@ public class ControllerProductSearch {
         viewProductSearch.setLocationRelativeTo(null);
         viewProductSearch.setTitle("Search products");
         fillManufacturers();
-        viewProductSearch.getjTableProducts().setModel(new ProductsTableModel(products));
+        viewProductSearch.getjTableProducts().setModel(new ProductsTableModel(Controller.getInstance().getAllProducts()));
         Controller.getInstance().getMap().put(Keys.PRODUCTS_TABLE_MODEL, viewProductSearch.getjTableProducts().getModel());
     }
 
@@ -86,18 +85,23 @@ public class ControllerProductSearch {
             public void actionPerformed(ActionEvent ae) {
                 int i = viewProductSearch.getjTableProducts().getSelectedRow();
                 if (i != -1) {
-                    Long id = (Long) viewProductSearch.getjTableProducts().getValueAt(i, 0);
-                    for (Product product : products) {
-                        if (product.getId().equals(id)) {
-                            try {
-                                Controller.getInstance().getMap().put(Keys.PRODUCT, product);
-                                controllerProduct = new ControllerProduct(
-                                        new ViewProduct(null, true), ViewProductMode.VIEW);
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
+                    try {
+                        Long id = (Long) viewProductSearch.getjTableProducts().getValueAt(i, 0);
+                        ProductsTableModel ptm = (ProductsTableModel) Controller.getInstance().getMap().get(Keys.PRODUCTS_TABLE_MODEL);
+                        for (Product product : ptm.getProducts()) {
+                            if (product.getId().equals(id)) {
+                                try {
+                                    Controller.getInstance().getMap().put(Keys.PRODUCT, product);
+                                    controllerProduct = new ControllerProduct(
+                                            new ViewProduct(null, true), ViewProductMode.VIEW);
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                }
+                                controllerProduct.open();
                             }
-                            controllerProduct.open();
                         }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
                     }
                 }
             }

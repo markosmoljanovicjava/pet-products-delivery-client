@@ -66,4 +66,7 @@ public class ProductsTableModel extends AbstractTableModel {
         return products.get(index);
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
 }
