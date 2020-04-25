@@ -53,7 +53,7 @@ public class ControllerContract {
     private void init() throws Exception {
         viewContract.setLocationRelativeTo(null);
         viewContract.setTitle("Contract");
-        
+
         AutoCompleteDecorator.decorate(viewContract.getjComboBoxManufacturer());
         AutoCompleteDecorator.decorate(viewContract.getjComboBoxCustomer());
 

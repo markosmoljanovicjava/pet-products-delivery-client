@@ -9,10 +9,10 @@ package validator.impl;
  *
  * @author marko
  */
-public class ProductNameRegexValidator extends RegexValidator{
+public class ProductNameRegexValidator extends RegexValidator {
 
     public ProductNameRegexValidator() {
         message = "Product name must contain only [letters, digits, _, -]";
     }
-    
+
 }

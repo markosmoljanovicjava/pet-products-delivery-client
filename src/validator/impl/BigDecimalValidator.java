@@ -15,7 +15,7 @@ import validator.Validator;
 public abstract class BigDecimalValidator implements Validator {
 
     protected String message;
-    
+
     @Override
     public void validate(Object object) throws Exception {
         try {

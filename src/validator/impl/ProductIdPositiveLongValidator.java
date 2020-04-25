@@ -9,10 +9,10 @@ package validator.impl;
  *
  * @author marko
  */
-public class ProductIdPositiveLongValidator extends PositiveLongValidator{
+public class ProductIdPositiveLongValidator extends PositiveLongValidator {
 
     public ProductIdPositiveLongValidator() {
         message = "Product id must be natural number";
     }
-    
+
 }
