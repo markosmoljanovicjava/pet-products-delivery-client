@@ -24,4 +24,6 @@ public class Main {
     // ProductsTableModel izmena preko tabele; i za ContarctTableModel
     // Obradidit izuzetke sto se tice konekcije
     // srediti property i config za konekciju
+    // refaktor validacija forme searchproduct i product
+    // refaktor panela
 }
