@@ -166,6 +166,18 @@ public class ControllerProductSearch {
                 }
             }
         });
+        viewProductSearch.getjButtonFilter().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    ProductsTableModel ptm = (ProductsTableModel) Controller.getInstance().getMap().get(Keys.PRODUCTS_TABLE_MODEL);
+                    ptm.setProducts(Controller.getInstance().getSearchedProducts(new Product()));
+                    ptm.refreash();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     private void setNamesForValidation() {

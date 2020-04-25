@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -170,4 +171,7 @@ public class Controller {
         throw new Exception(responseObject.getErrorMessage());
     }
 
+    public List<Product> getSearchedProducts(Product product) {
+        return new ArrayList();
+    }
 }
