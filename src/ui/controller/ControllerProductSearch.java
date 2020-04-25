@@ -13,10 +13,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import ui.component.ProductsTableModel;
 import ui.view.ViewProduct;
@@ -68,6 +70,7 @@ public class ControllerProductSearch {
     private void init() throws Exception {
         viewProductSearch.setLocationRelativeTo(null);
         viewProductSearch.setTitle("Search products");
+        viewProductSearch.getjComboBoxManufacturer().setEnabled(false);
         fillManufacturers();
         viewProductSearch.getjTableProducts().setModel(new ProductsTableModel(Controller.getInstance().getAllProducts()));
         Controller.getInstance().getMap().put(Keys.PRODUCTS_TABLE_MODEL, viewProductSearch.getjTableProducts().getModel());
@@ -174,11 +177,29 @@ public class ControllerProductSearch {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    if (viewProductSearch.getjTextFieldId().getText().isEmpty()
+                            && viewProductSearch.getjTextFieldName().getText().isEmpty()
+                            && viewProductSearch.getjTextFieldPrice().getText().isEmpty()
+                            && !viewProductSearch.getjComboBoxManufacturer().isEnabled()) {
+                        JOptionPane.showMessageDialog(null, "You must search by at least one criterion!");
+                        return;
+                    }
                     ProductsTableModel ptm = (ProductsTableModel) Controller.getInstance().getMap().get(Keys.PRODUCTS_TABLE_MODEL);
-                    ptm.setProducts(Controller.getInstance().getSearchedProducts(new Product()));
+                    Product product = createProductForSearch();
+                    ptm.setProducts(Controller.getInstance().getAllProductsForManufacturer(product));
                     ptm.refreash();
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                }
+            }
+        });
+        viewProductSearch.getjCheckBoxManufacturer().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (viewProductSearch.getjCheckBoxManufacturer().isSelected()) {
+                    viewProductSearch.getjComboBoxManufacturer().setEnabled(true);
+                } else {
+                    viewProductSearch.getjComboBoxManufacturer().setEnabled(false);
                 }
             }
         });
@@ -203,5 +224,22 @@ public class ControllerProductSearch {
     private void fillManufacturers() throws Exception {
         List<Manufacturer> manufacturers = Controller.getInstance().getAllManufacturers();
         viewProductSearch.getjComboBoxManufacturer().setModel(new DefaultComboBoxModel(manufacturers.toArray()));
+    }
+
+    private Product createProductForSearch() {
+        Product product = new Product();
+        if (!viewProductSearch.getjTextFieldId().getText().isEmpty()) {
+            product.setId(Long.parseLong(viewProductSearch.getjTextFieldId().getText()));
+        }
+        if (!viewProductSearch.getjTextFieldName().getText().isEmpty()) {
+            product.setName(viewProductSearch.getjTextFieldName().getText());
+        }
+        if (!viewProductSearch.getjTextFieldPrice().getText().isEmpty()) {
+            product.setPrice(new BigDecimal(viewProductSearch.getjTextFieldPrice().getText()));
+        }
+        if (viewProductSearch.getjCheckBoxManufacturer().isSelected()) {
+            product.setManufacturer((Manufacturer) viewProductSearch.getjComboBoxManufacturer().getSelectedItem());
+        }
+        return product;
     }
 }
