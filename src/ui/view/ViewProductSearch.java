@@ -53,6 +53,7 @@ public class ViewProductSearch extends javax.swing.JDialog {
         jLabelErrorId = new javax.swing.JLabel();
         jButtonFilter = new javax.swing.JButton();
         jCheckBoxManufacturer = new javax.swing.JCheckBox();
+        jButtonResetFilter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -113,9 +114,12 @@ public class ViewProductSearch extends javax.swing.JDialog {
 
         jLabelErrorId.setForeground(new java.awt.Color(255, 0, 51));
 
+        jButtonFilter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonFilter.setText("Filter");
 
         jCheckBoxManufacturer.setText("Search by Manufacturer?");
+
+        jButtonResetFilter.setText("Reset Filter");
 
         javax.swing.GroupLayout jPanelNewProductLayout = new javax.swing.GroupLayout(jPanelNewProduct);
         jPanelNewProduct.setLayout(jPanelNewProductLayout);
@@ -151,12 +155,14 @@ public class ViewProductSearch extends javax.swing.JDialog {
                                 .addComponent(jLabelManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBoxManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 99, Short.MAX_VALUE)))
+                                .addGap(0, 151, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNewProductLayout.createSequentialGroup()
                         .addComponent(jCheckBoxManufacturer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonFilter))))
+                        .addComponent(jButtonResetFilter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanelNewProductLayout.setVerticalGroup(
             jPanelNewProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,11 +190,12 @@ public class ViewProductSearch extends javax.swing.JDialog {
                     .addComponent(jLabelManufacturer)
                     .addComponent(jComboBoxManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(jPanelNewProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonFilter, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanelNewProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonResetFilter, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNewProductLayout.createSequentialGroup()
                         .addComponent(jCheckBoxManufacturer)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addComponent(jButtonFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,9 +205,9 @@ public class ViewProductSearch extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelNewProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCancel)
-                    .addComponent(jPanelProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelNewProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -222,6 +229,7 @@ public class ViewProductSearch extends javax.swing.JDialog {
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDetails;
     private javax.swing.JButton jButtonFilter;
+    private javax.swing.JButton jButtonResetFilter;
     private javax.swing.JCheckBox jCheckBoxManufacturer;
     private javax.swing.JComboBox<String> jComboBoxManufacturer;
     private javax.swing.JLabel jLabelErrorId;
@@ -286,5 +294,9 @@ public class ViewProductSearch extends javax.swing.JDialog {
 
     public JCheckBox getjCheckBoxManufacturer() {
         return jCheckBoxManufacturer;
+    }
+
+    public JButton getjButtonResetFilter() {
+        return jButtonResetFilter;
     }
 }
