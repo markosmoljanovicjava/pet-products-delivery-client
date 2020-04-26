@@ -238,10 +238,6 @@ public class ControllerProduct {
     private void delete() throws Exception {
         Product product = new Product();
         product.setId(Long.parseLong(viewProduct.getjTextFieldId().getText()));
-        product.setName(viewProduct.getjTextFieldName().getText());
-        product.setPrice(new BigDecimal(viewProduct.getjTextFieldPrice().getText()));
-        product.setManufacturer((Manufacturer) viewProduct.getjComboBoxManufacturer().getSelectedItem());
-        product.setId(Long.parseLong(viewProduct.getjTextFieldId().getText()));
         Controller.getInstance().deleteProduct(product);
     }
 
