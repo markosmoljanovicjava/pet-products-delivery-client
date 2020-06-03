@@ -169,4 +169,17 @@ public class Controller {
         }
         throw new Exception(responseObject.getErrorMessage());
     }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public ObjectOutputStream getObjectOutputStream() {
+        return objectOutputStream;
+    }
+
+    public ObjectInputStream getObjectInputStream() {
+        return objectInputStream;
+    }
+
 }

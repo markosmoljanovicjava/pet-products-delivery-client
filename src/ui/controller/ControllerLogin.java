@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import thread.ThreadConnection;
 import thread.ThreadLogin;
 import ui.view.ViewLogin;
 import ui.view.ViewMain;
@@ -105,6 +106,8 @@ public class ControllerLogin {
             threadLogin.interrupt();
             close();
             new ControllerMain(new ViewMain()).open();
+            new ThreadConnection(Controller.getInstance().getObjectOutputStream(),
+                    Controller.getInstance().getObjectInputStream()).start();
         } catch (Exception ex) {
             ex.printStackTrace();
             if (ex.getMessage().equals("Your login credentials don't match an account in our system.")) {
