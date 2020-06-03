@@ -15,12 +15,13 @@ import javax.swing.JTextField;
  *
  * @author marko
  */
-public class ViewContract extends javax.swing.JFrame {
+public class ViewContract extends javax.swing.JDialog {
 
     /**
      * Creates new form ViewContract
      */
-    public ViewContract() {
+    public ViewContract(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -131,7 +132,7 @@ public class ViewContract extends javax.swing.JFrame {
         jLabelErrorQuantity = new javax.swing.JLabel();
         jButtonSave = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanelContract.setBorder(javax.swing.BorderFactory.createTitledBorder("Contract"));
 

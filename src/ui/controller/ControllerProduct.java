@@ -108,10 +108,13 @@ public class ControllerProduct {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 try {
-                    update();
-                    fillTable();
-                    JOptionPane.showMessageDialog(null, "Product is updated!");
-                    init(ViewProductMode.VIEW);
+                    int i = JOptionPane.showConfirmDialog(null, "Are you sure?");
+                    if (i == 0) {
+                        update();
+                        fillTable();
+                        JOptionPane.showMessageDialog(null, "Product is updated!");
+                        init(ViewProductMode.VIEW);
+                    }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

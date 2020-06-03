@@ -70,7 +70,7 @@ public class ControllerMain {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controllerContract = new ControllerContract(new ViewContract());
+                    controllerContract = new ControllerContract(new ViewContract(viewMain, true));
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
