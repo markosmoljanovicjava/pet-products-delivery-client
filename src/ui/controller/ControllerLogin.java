@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import thread.ThreadLogin;
@@ -106,9 +107,13 @@ public class ControllerLogin {
             new ControllerMain(new ViewMain()).open();
         } catch (Exception ex) {
             ex.printStackTrace();
-            viewLogin.getjLabelError().setText(ex.getMessage());
-            viewLogin.getjTextFieldUsername().setBorder(BorderFactory.createLineBorder(Color.RED, 1));
-            viewLogin.getjPasswordFieldPassword().setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+            if (ex.getMessage().equals("Your login credentials don't match an account in our system.")) {
+                viewLogin.getjLabelError().setText(ex.getMessage());
+                viewLogin.getjTextFieldUsername().setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+                viewLogin.getjPasswordFieldPassword().setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+            } else {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
         }
     }
 
