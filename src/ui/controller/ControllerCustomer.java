@@ -9,6 +9,7 @@ import controller.Controller;
 import domain.Customer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import ui.view.ViewCustomer;
 
 /**
@@ -46,6 +47,7 @@ public class ControllerCustomer {
                     customer.setPhoneNumber(viewCustomer.getjTextFieldPhoneNumber().getText());
                     customer.setAdress(viewCustomer.getjTextFieldAdress().getText());
                     Controller.getInstance().registerCustomer(customer);
+                    JOptionPane.showMessageDialog(null, "Customer successfully registered!");
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
