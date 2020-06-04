@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ui.view.ViewContract;
+import ui.view.ViewCustomer;
 import ui.view.ViewMain;
 import ui.view.ViewProduct;
 import ui.view.ViewProductMode;
@@ -75,6 +76,13 @@ public class ControllerMain {
                     ex.printStackTrace();
                 }
                 controllerContract.open();
+            }
+        });
+        viewMain.getjMenuItemRegister().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ControllerCustomer controllerCustomer = new ControllerCustomer(new ViewCustomer(viewMain, true));
+                controllerCustomer.open();
             }
         });
     }

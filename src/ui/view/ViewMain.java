@@ -35,6 +35,8 @@ public class ViewMain extends javax.swing.JFrame {
         jMenuItemProductSearch = new javax.swing.JMenuItem();
         jMenuContract = new javax.swing.JMenu();
         jMenuItemContractNew = new javax.swing.JMenuItem();
+        jMenuCustomer = new javax.swing.JMenu();
+        jMenuItemRegister = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +57,13 @@ public class ViewMain extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuContract);
 
+        jMenuCustomer.setText("Customer");
+
+        jMenuItemRegister.setText("Register");
+        jMenuCustomer.add(jMenuItemRegister);
+
+        jMenuBar1.add(jMenuCustomer);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -74,9 +83,11 @@ public class ViewMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuContract;
+    private javax.swing.JMenu jMenuCustomer;
     private javax.swing.JMenuItem jMenuItemContractNew;
     private javax.swing.JMenuItem jMenuItemProductNew;
     private javax.swing.JMenuItem jMenuItemProductSearch;
+    private javax.swing.JMenuItem jMenuItemRegister;
     private javax.swing.JMenu jMenuProduct;
     // End of variables declaration//GEN-END:variables
 
@@ -90,6 +101,10 @@ public class ViewMain extends javax.swing.JFrame {
 
     public JMenuItem getjMenuItemContractNew() {
         return jMenuItemContractNew;
+    }
+
+    public JMenuItem getjMenuItemRegister() {
+        return jMenuItemRegister;
     }
 
 }

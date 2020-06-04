@@ -182,4 +182,17 @@ public class Controller {
         return objectInputStream;
     }
 
+    public Customer registerCustomer(Customer customer) throws Exception {
+        RequestObject requestObject = new RequestObject(Operation.REGISTER_CUSTOMER, customer);
+        objectOutputStream.writeObject(requestObject);
+        objectOutputStream.flush();
+
+        ResponseObject responseObject = (ResponseObject) objectInputStream.readObject();
+        if (responseObject.getStatus().equals(ResponseStatus.SUCCESS)) {
+            Customer customer1 = (Customer) responseObject.getData();
+            return customer1;
+        }
+        throw new Exception(responseObject.getErrorMessage());
+    }
+
 }
