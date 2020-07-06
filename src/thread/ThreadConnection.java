@@ -33,7 +33,7 @@ public class ThreadConnection extends Thread {
                 objectOutputStream.writeObject(new RequestObject(Operation.IS_CONNECTED));
                 objectOutputStream.flush();
                 objectInputStream.readObject();
-                sleep(1000);
+                sleep(100000000);
             } catch (Exception ex) {
                 interrupt();
                 JOptionPane.showMessageDialog(null, "Disconnected!");
