@@ -106,8 +106,7 @@ public class ControllerLogin {
             threadLogin.interrupt();
             close();
             new ControllerMain(new ViewMain()).open();
-            new ThreadConnection(Controller.getInstance().getObjectOutputStream(),
-                    Controller.getInstance().getObjectInputStream()).start();
+            new ThreadConnection().start();
         } catch (Exception ex) {
             ex.printStackTrace();
             if (ex.getMessage().equals("Your login credentials don't match an account in our system.")) {
