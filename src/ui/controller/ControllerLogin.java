@@ -108,7 +108,7 @@ public class ControllerLogin {
             new ControllerMain(new ViewMain()).open();
             new ThreadConnection().start();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.toString());
             if (ex.getMessage().equals("Your login credentials don't match an account in our system.")) {
                 viewLogin.getjLabelError().setText(ex.getMessage());
                 viewLogin.getjTextFieldUsername().setBorder(BorderFactory.createLineBorder(Color.RED, 1));
